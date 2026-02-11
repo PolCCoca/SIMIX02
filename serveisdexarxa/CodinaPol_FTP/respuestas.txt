@@ -1,0 +1,6 @@
+IP de cada PC: PROF: 192.168.20.3  ALUM: 192.168.20.4  GUEST: 192.168.20.2
+Que pueden hacer:
+guest: puede descargar archivos, no puede subir archivos
+alum: puede descargar y subir archivos, no puede borrar archivos
+profe: puede hacer todo
+admin: puede hacer todo 
