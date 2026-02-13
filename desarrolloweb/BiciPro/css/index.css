@@ -1,0 +1,4 @@
+.contenedor{display:flex;gap:20px;}
+.noticias,.indice{background:#fff;padding:15px;width:50%;}
+.logos{list-style:none;display:flex;gap:125px;padding:0;}
+.logos img{height:128px;}
