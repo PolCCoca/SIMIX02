@@ -1,0 +1,19 @@
+
+/* ===============================
+   ESTILO DE SECCIONES EN MARCAS
+================================== */
+section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+section a {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+section a:hover {
+    text-decoration: underline;
+}

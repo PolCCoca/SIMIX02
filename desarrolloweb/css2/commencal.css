@@ -1,0 +1,26 @@
+
+/* ===============================
+   1. TÍTULO LOGO
+================================== */
+.titulo-logo img {
+    width: 150px;
+}
+
+/* ===============================
+   2. IMÁGENES DE PRODUCTO
+================================== */
+section img {
+    width: 300px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+/* ===============================
+   3. SECCIONES
+================================== */
+section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}

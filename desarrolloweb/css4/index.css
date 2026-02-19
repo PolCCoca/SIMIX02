@@ -1,0 +1,28 @@
+
+.contenedor {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.noticias, .indice {
+    flex: 1;
+}
+
+.logos {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.logos img {
+    width: 120px;
+    transition: 0.4s;
+    filter: grayscale(100%);
+}
+
+.logos img:hover {
+    transform: scale(1.15);
+    filter: grayscale(0%);
+}

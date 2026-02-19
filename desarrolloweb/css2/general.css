@@ -1,0 +1,68 @@
+
+/* ===============================
+   1. RESET GENERAL
+   Elimina márgenes y paddings por defecto
+================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Hace que el padding no aumente el tamaño total */
+}
+
+/* ===============================
+   2. ESTILO DEL BODY
+   Define fuente y color general
+================================== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* ===============================
+   3. HEADER (Cabecera)
+   Estilo del título y menú
+================================== */
+header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===============================
+   4. NAVEGACIÓN
+   Estilo del menú
+================================== */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none; /* Quita subrayado */
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff6600; /* Cambia color al pasar el ratón */
+}
+
+/* ===============================
+   5. MAIN (Contenido principal)
+================================== */
+main {
+    padding: 30px;
+}
+
+/* ===============================
+   6. FOOTER
+================================== */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}

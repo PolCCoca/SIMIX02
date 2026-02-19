@@ -1,0 +1,11 @@
+
+section a {
+    color: #00c853;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+section a:hover {
+    color: black;
+}

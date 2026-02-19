@@ -1,0 +1,29 @@
+
+.contenedor {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.noticias, .indice {
+    flex: 1;
+}
+
+/* Logos estilo agresivo */
+.logos {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.logos img {
+    width: 110px;
+    transition: 0.4s;
+    filter: brightness(0.8);
+}
+
+.logos img:hover {
+    transform: scale(1.25);
+    filter: brightness(1.2);
+}

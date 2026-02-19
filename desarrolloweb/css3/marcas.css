@@ -1,0 +1,11 @@
+
+section a {
+    color: #ff4500;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+section a:hover {
+    color: white;
+}

@@ -1,0 +1,46 @@
+
+/* ===============================
+   1. CONTENEDOR PRINCIPAL
+================================== */
+.contenedor {
+    display: flex; /* Coloca secciones en fila */
+    gap: 30px; /* Espacio entre secciones */
+}
+
+/* ===============================
+   2. SECCIÓN NOTICIAS
+================================== */
+.noticias {
+    flex: 1; /* Ocupa una parte del espacio */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* ===============================
+   3. SECCIÓN MARCAS
+================================== */
+.indice {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* ===============================
+   4. LOGOS
+================================== */
+.logos {
+    list-style: none; /* Quita puntos de la lista */
+    display: flex;
+    gap: 15px;
+}
+
+.logos img {
+    width: 80px; /* Tamaño uniforme */
+    transition: transform 0.3s; /* Animación suave */
+}
+
+.logos img:hover {
+    transform: scale(1.2); /* Agranda al pasar el ratón */
+}
