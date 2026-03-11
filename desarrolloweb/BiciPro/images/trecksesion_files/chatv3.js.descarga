@@ -1,0 +1,137 @@
+(function(scriptElement){
+  var moduleName = "VCCEmbeddedChatLoader";
+  var ds = scriptElement.dataset;
+
+  getDeliveryInfo(ds)
+    .then(function(deliveryInfo) {
+    var registryServiceConfig = {
+      "cloud8BaseUrl": ds.cloud8BaseUrl ||  deliveryInfo.cloud8BaseUrl,
+      "cloud8RegistryPath": ds.cloud8RegistryPath || "/platform-mfe-registry/public/v1/builds",
+    };
+    var apps = ['vcc-embedded-chat-loader@*', 'vcc-embedded-chat-forms@*', 'vcc-embedded-chat-window@*'];
+    if (ds.deliveryRealm === 'qa' || deliveryInfo.deliveryRealm === 'qa') {
+      apps.push('web-apps-shell@*');
+    }
+    return getAppsInfo(registryServiceConfig.cloud8BaseUrl + registryServiceConfig.cloud8RegistryPath, {
+      apps: apps,
+      deliveryRealm: deliveryInfo.deliveryRealm,
+      tenant: deliveryInfo.tenant,
+			platform: `${deliveryInfo.cluster}-P${deliveryInfo.platform}`,
+			cluster: deliveryInfo.cluster,
+			site: deliveryInfo.site,
+    });
+  })
+  .then(function(apps) {
+    var loaderAppInfo = apps.content.find(function(item) { return item.appName==='vcc-embedded-chat-loader'});
+    if (ds.brokerUrl) {
+      loaderAppInfo.publicUrl = ds.brokerUrl;
+    } else {
+      loaderAppInfo.publicUrl += 'remoteEntry.js';
+    }
+    return loadBrokerScript(loaderAppInfo)
+      .then(function(broker) {
+        var ev = new CustomEvent('init', {
+          detail: {
+            init: function(props, cb) {
+              var brokerProps = Object.assign({}, props, {shellUrl: loaderAppInfo.publicUrl});
+              // brokerProps is the "config" object that is declared in initial script injected in lading page
+              broker.init(brokerProps, cb);
+            }
+          }
+        });
+        // this event is listened by the script that is injected in the landing page
+        scriptElement.dispatchEvent(ev);
+      })
+      ;
+  });
+
+  function getDeliveryInfo(ds) {
+    var defaultInfo = {
+      cloud8BaseUrl: "https://cloud8.8x8.com", // production
+      deliveryRealm: "production",
+    };
+    return new Promise(function(resolve) {
+      if (!ds.domain) {
+        resolve(defaultInfo);
+        return;
+      }
+      var url = ds.domain + "/CHAT/chat_v3_get_delivery_info.php";
+      fetch(url).then(function(r) {
+        if (r.status !== 200) {
+          var err = new Error(r.status + ' ' + r.statusText + ': ' + url);
+          reportError('Fetching delivery info error', err, 'ERR_DELIVERY_INFO_ERROR');
+          resolve(defaultInfo);
+        }
+        return r.json();
+      }).then(function(deliveryInfo) {
+        resolve(Object.assign({}, defaultInfo, deliveryInfo));
+      }).catch(function(err) {
+        reportError(moduleName + ' error', err, 'ERR_DELIVERY_INFO_ERROR');
+        resolve(defaultInfo);
+      }).finally(function() {
+        resolve(defaultInfo);
+      });
+    });
+  }
+
+  function loadBrokerScript(appInfo) {
+    return new Promise(function(resolve, reject) {
+      var se = document.createElement("script");
+      se.type = "text/javascript";
+      se.async = true;
+      se.src = appInfo.publicUrl;
+      se.onload = function() {
+        var container = window[moduleName];
+        if (!container) {
+          reportError(moduleName + ': container cannot be found!', new Error('Mismatched module name'), 'ERR_MODULE_NOT_FOUND');
+          reject('ERR_MODULE_NOT_FOUND');
+          return;
+        }
+        container.get('broker')
+          .then(function(Module) {
+            resolve(Module().default);
+          })
+          .catch((function(err) {
+            reportError(moduleName + ' error', err, 'ERR_MODULE_ERROR');
+            reject('ERR_MODULE_ERROR')
+          }));
+      }
+      se.onerror = function(e) {
+        reportError('Script load error: ' + shellUrl, e, 'ERR_SCRIPT_LOAD');
+        reject('ERR_SCRIPT_LOAD');
+      }
+      var os = document.getElementsByTagName("script")[0];
+      os.parentNode.insertBefore(se, os);
+    })
+  }
+
+  function getAppsInfo(registryUrl, regParams) {
+    const params = Object.assign({
+      deliveryRealm: 'production',
+    }, regParams || {})
+    var qs = Object.keys(params).reduce(function(acc, k) {
+      acc.push(k + '=' + encodeURIComponent(params[k]));
+      return acc;
+    }, []).join('&')
+    return fetch(registryUrl + '?' + qs)
+      .then(function(r) {
+        if(r.status !== 200) {
+          var err = new Error(r.status + ' ' + r.statusText + ': ' + registryUrl + '?' + qs);
+          reportError('Registry service error', err, 'ERR_REGISTRY_ERROR');
+          throw err;
+        }
+        return r.json();
+      })
+  }
+
+  function reportError(description, err, code) {
+    scriptElement.dispatchEvent(
+      new CustomEvent('customerror', {
+        detail: {
+          error: err,
+          description: description,
+          code: code,
+        }})
+    );
+  }
+})(document.currentScript)
