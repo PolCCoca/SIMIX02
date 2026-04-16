@@ -16,8 +16,8 @@ header {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex;
 
     /* 👇 TU IMAGEN */
     background-image: url("../images/fondocon.png");
@@ -77,10 +77,6 @@ section img {
     margin-top: 20px;
     border-radius: 10px;
     transition: 0.3s;
-}
-
-section img:hover {
-    transform: scale(1.05);
 }
 
 footer {

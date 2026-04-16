@@ -79,9 +79,6 @@ section img {
     transition: 0.3s;
 }
 
-section img:hover {
-    transform: scale(1.05);
-}
 
 footer {
     background: black;
