@@ -22,8 +22,6 @@ body {
 header {
     background: black;
     color: white;
-    justify-content: space-around;
-    align-items: center;
     padding: 20px;
     text-align: center;
     border-bottom: 4px solid #00c853;
@@ -39,9 +37,7 @@ nav a {
     font-weight: bold;
 }
 
-nav a:hover {
-    color: #00c853;
-}
+
 
 /* ===============================
    CONTENEDOR
@@ -75,9 +71,11 @@ nav a:hover {
 
 .logos img {
     width: 100px;
-    transition: 0.3s;
 }
 
+.logos a {
+    text-decoration: none;
+}
 
 /* ===============================
    FOOTER

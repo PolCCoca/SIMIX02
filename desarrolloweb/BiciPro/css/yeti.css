@@ -13,50 +13,33 @@ header {
     position: relative;
     height: 90vh;
     overflow: hidden;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* 👇 TU IMAGEN */
-    background-image: url("../images/fondotr.png");
+    background-image: url("../images/fondo-yeti.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-
 nav a {
-    color: #000000;
+    color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     font-weight: bold;
     text-decoration: none;
     margin: 0 15px;
 }
 
+nav a:hover {
+    color: #00c853;
+}
 
 main {
     padding: 50px;
 }
 
 section {
-    background: rgb(255, 255, 255);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.seccion-2 {
-    background: rgb(255, 255, 255);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.seccion-3 {
     background: rgb(255, 255, 255);
     padding: 30px;
     border-radius: 10px;
@@ -76,16 +59,12 @@ section img {
     transition: 0.3s;
 }
 
-
 footer {
     background: black;
     color: white;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin: 40px;
     border-radius: 10px;
 }
 
